@@ -40,6 +40,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         devicePolicyService = DevicePolicyService(this)
         
+        // Create notification channel on app startup
+        NotificationHelper.createChannel(this)
+        
         // Auto-apply security settings if Device Owner
         if (devicePolicyService.isDeviceOwner()) {
             devicePolicyService.disableFactoryReset()

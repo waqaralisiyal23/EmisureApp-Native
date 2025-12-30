@@ -72,7 +72,10 @@ class EmisureFCMService : FirebaseMessagingService() {
 
     /**
      * Called when a message is received.
-     * This is called for both foreground and background messages.
+     * This is called for both foreground and background messages (data-only).
+     * 
+     * NOTE: If FCM message contains a 'notification' payload and the app is in background,
+     * Android automatically shows it. If in foreground, we must manually show it here.
      */
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
@@ -84,7 +87,18 @@ class EmisureFCMService : FirebaseMessagingService() {
         Log.d(TAG, "Notification: ${message.notification?.title} - ${message.notification?.body}")
         Log.d(TAG, "=====================================")
         
-        // Handle data payload
+        // Handle notification payload (for foreground display)
+        // When app is in foreground, FCM does NOT auto-show notifications
+        message.notification?.let { notification ->
+            val title = notification.title ?: "Emisure"
+            val body = notification.body ?: ""
+            
+            // Show notification manually since we're in foreground
+            NotificationHelper.showNotification(applicationContext, title, body)
+            Log.d(TAG, "📢 Foreground notification displayed: $title")
+        }
+        
+        // Handle data payload (custom actions like lock/unlock)
         if (message.data.isNotEmpty()) {
             handleDataMessage(message.data)
         }
