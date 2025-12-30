@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Background color: Deep Navy -->
-    <item android:drawable="@color/splash_background" />
+    <!-- Background color: Teal (matches header) -->
+    <item android:drawable="@color/secondary_teal" />
     
     <!-- App icon centered -->
     <item>
