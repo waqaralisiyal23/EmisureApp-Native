@@ -44,18 +44,18 @@ class EmisureDeviceAdminReceiver : DeviceAdminReceiver() {
         return "Warning: Disabling will remove device management. Contact your seller."
     }
 
-    override fun onPasswordChanged(context: Context, intent: Intent) {
-        super.onPasswordChanged(context, intent)
-        Log.i(TAG, "Password Changed")
-    }
-
-    override fun onPasswordFailed(context: Context, intent: Intent) {
-        super.onPasswordFailed(context, intent)
-        Log.w(TAG, "Password Failed Attempt")
-    }
-
-    override fun onPasswordSucceeded(context: Context, intent: Intent) {
-        super.onPasswordSucceeded(context, intent)
-        Log.i(TAG, "Password Succeeded")
-    }
+//    override fun onPasswordChanged(context: Context, intent: Intent) {
+//        super.onPasswordChanged(context, intent)
+//        Log.i(TAG, "Password Changed")
+//    }
+//
+//    override fun onPasswordFailed(context: Context, intent: Intent) {
+//        super.onPasswordFailed(context, intent)
+//        Log.w(TAG, "Password Failed Attempt")
+//    }
+//
+//    override fun onPasswordSucceeded(context: Context, intent: Intent) {
+//        super.onPasswordSucceeded(context, intent)
+//        Log.i(TAG, "Password Succeeded")
+//    }
 }
