@@ -44,8 +44,8 @@ FCM_SCOPES = ["https://www.googleapis.com/auth/firebase.messaging"]
 
 # Default FCM Token - Set your device token here to avoid passing it every time
 # Copy the token from the app's "Device Token" section
-DEFAULT_FCM_TOKEN = "cgiryiMtQp2bY4miVvt_uu:APA91bFhqIcq4BsmCziDuU2AJFuWvCNhUAiQRtnH4N2TRmshrjUXht5UFtCWyc_TO4_KynZn3J5hdriMZrfJzW296R3OtJIfravCCE4ngTy4TyEhdehnNC0"
-# DEFAULT_FCM_TOKEN = "f6cB1sMFS5CISQNSkB1HHd:APA91bEOQWzs0c80LbV1d-ndxm8akqo2zrQ3PMiMQ75LsaRBeBw4TVq2w-xSmY6018btH5R02RRBi0dTIhWEAZ1wANAubkEsAwRr-4Pm29Vv-05CszaZYYU"
+# DEFAULT_FCM_TOKEN = "cgiryiMtQp2bY4miVvt_uu:APA91bFhqIcq4BsmCziDuU2AJFuWvCNhUAiQRtnH4N2TRmshrjUXht5UFtCWyc_TO4_KynZn3J5hdriMZrfJzW296R3OtJIfravCCE4ngTy4TyEhdehnNC0"
+DEFAULT_FCM_TOKEN = "f6cB1sMFS5CISQNSkB1HHd:APA91bEOQWzs0c8OLbV1d-ndxm8aKqo2zrQ3PMiMQ75LsaRBeBw4TVq2w-xSmY6018btH5RO2RRBi0dTlhWEAZ1wANAubkEsAwRr-4Pm29Vv-O5CszaZYYU"
 
 
 def get_project_id():

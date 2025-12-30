@@ -272,46 +272,81 @@ class DevicePolicyService(private val context: Context) {
 
     /**
      * Checks if notifications are enabled and forces them to be enabled if not.
-     * Uses Device Owner privileges to override user settings via AppOps.
+     * Uses Device Owner setPermissionGrantState for Android 13+.
+     * Also blocks access to notification settings to prevent user from disabling.
      */
     fun enforceNotificationsEnabled(): Boolean {
         return try {
+            if (!isDeviceOwner()) {
+                Log.e(TAG, "Cannot enforce notifications: Not device owner")
+                return false
+            }
+            
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
             val areEnabled = notificationManager.areNotificationsEnabled()
             
-            if (!areEnabled && isDeviceOwner()) {
-                Log.w(TAG, "Notifications are disabled, attempting to force enable...")
-                
-                // Use App Ops to force enable notifications
+            Log.d(TAG, "Current notification status: enabled=$areEnabled")
+            
+            // For Android 13+ (API 33+), use setPermissionGrantState
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 try {
-                    val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
-                    val uid = context.applicationInfo.uid
-                    
-                    // OP_POST_NOTIFICATION = 11, MODE_ALLOWED = 0
-                    val method = appOps.javaClass.getMethod(
-                        "setMode",
-                        Int::class.javaPrimitiveType,
-                        Int::class.javaPrimitiveType,
-                        String::class.java,
-                        Int::class.javaPrimitiveType
+                    val granted = devicePolicyManager.setPermissionGrantState(
+                        componentName,
+                        context.packageName,
+                        android.Manifest.permission.POST_NOTIFICATIONS,
+                        DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED
                     )
-                    method.invoke(appOps, 11, uid, context.packageName, 0)
-                    
-                    Log.i(TAG, "Notifications force-enabled via AppOps")
-                    true
+                    Log.i(TAG, "POST_NOTIFICATIONS permission grant state set: $granted")
                 } catch (e: Exception) {
-                    Log.e(TAG, "Could not force-enable via AppOps: ${e.message}")
-                    false
+                    Log.e(TAG, "Failed to set permission grant state: ${e.message}")
                 }
-            } else {
-                if (areEnabled) {
-                    Log.i(TAG, "Notifications are already enabled")
-                }
-                true
             }
+            
+            // Ensure notification channel is enabled
+            ensureNotificationChannelEnabled()
+            
+            // Check again after our changes
+            val nowEnabled = notificationManager.areNotificationsEnabled()
+            Log.i(TAG, "Notifications enabled after enforcement: $nowEnabled")
+            
+            nowEnabled
         } catch (e: Exception) {
             Log.e(TAG, "Error enforcing notifications: ${e.message}")
             false
+        }
+    }
+    
+    /**
+     * Ensures the notification channel is properly created and enabled.
+     */
+    private fun ensureNotificationChannelEnabled() {
+        try {
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+            
+            // Create or update the channel
+            val channel = android.app.NotificationChannel(
+                "emisure_notifications",
+                "Emisure Notifications",
+                android.app.NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Important notifications from Emisure"
+                enableLights(true)
+                enableVibration(true)
+                setBypassDnd(true)
+                lockscreenVisibility = android.app.Notification.VISIBILITY_PUBLIC
+            }
+            notificationManager.createNotificationChannel(channel)
+            
+            // Check if channel exists and is enabled
+            val existingChannel = notificationManager.getNotificationChannel("emisure_notifications")
+            if (existingChannel != null) {
+                Log.i(TAG, "Channel importance: ${existingChannel.importance}")
+                if (existingChannel.importance == android.app.NotificationManager.IMPORTANCE_NONE) {
+                    Log.w(TAG, "Notification channel is disabled by user")
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error ensuring notification channel: ${e.message}")
         }
     }
 
