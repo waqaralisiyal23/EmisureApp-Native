@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.Emisure" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base Theme for Emisure -->
+    <style name="Theme.Emisure" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary_navy</item>
+        <item name="android:navigationBarColor">@color/primary_navy</item>
+        <item name="android:windowBackground">@color/light_background</item>
+    </style>
+    
+    <!-- Splash Screen Theme -->
+    <style name="Theme.Emisure.Splash" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/splash_background</item>
+        <item name="android:navigationBarColor">@color/splash_background</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>

@@ -10,30 +10,59 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+// ====================================================================
+// Dark Color Scheme - Matches the premium dark icon aesthetic
+// ====================================================================
 private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryBlue,
-    secondary = SecondaryPurple,
+    primary = PrimaryCyan,
+    onPrimary = PrimaryNavy,
+    primaryContainer = SecondaryTeal,
+    onPrimaryContainer = LightSurface,
+    secondary = SecondaryTeal,
+    onSecondary = LightSurface,
+    secondaryContainer = DarkSurfaceVariant,
+    onSecondaryContainer = DarkOnSurface,
+    tertiary = MetallicSilver,
+    onTertiary = PrimaryNavy,
     background = DarkBackground,
+    onBackground = DarkOnBackground,
     surface = DarkSurface,
-    onBackground = DarkOnSurface,
     onSurface = DarkOnSurface,
-    onSurfaceVariant = DarkOnSurfaceVariant
+    surfaceVariant = DarkSurfaceVariant,
+    onSurfaceVariant = DarkOnSurfaceVariant,
+    error = StatusRed,
+    onError = LightSurface
 )
 
+// ====================================================================
+// Light Color Scheme - Clean and professional
+// ====================================================================
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryBlue,
-    secondary = SecondaryPurple,
+    primary = PrimaryCyan,
+    onPrimary = LightSurface,
+    primaryContainer = PrimaryCyanDark,
+    onPrimaryContainer = LightSurface,
+    secondary = SecondaryTeal,
+    onSecondary = LightSurface,
+    secondaryContainer = LightSurfaceVariant,
+    onSecondaryContainer = LightOnSurface,
+    tertiary = MetallicSilverDark,
+    onTertiary = LightSurface,
     background = LightBackground,
+    onBackground = LightOnBackground,
     surface = LightSurface,
-    onBackground = LightOnSurface,
     onSurface = LightOnSurface,
-    onSurfaceVariant = LightOnSurfaceVariant
+    surfaceVariant = LightSurfaceVariant,
+    onSurfaceVariant = LightOnSurfaceVariant,
+    error = StatusRed,
+    onError = LightSurface
 )
 
 @Composable
 fun EmisureTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
+    // Disabled by default to maintain brand consistency
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {

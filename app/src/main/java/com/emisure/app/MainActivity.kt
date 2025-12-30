@@ -70,18 +70,26 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// Modern color palette
-private val PrimaryBlue = Color(0xFF4F46E5)
-private val PrimaryPurple = Color(0xFF7C3AED)
+// ============================================================
+// Emisure Brand Colors - Matching App Icon
+// ============================================================
+// Primary: Electric Cyan & Deep Navy
+private val PrimaryCyan = Color(0xFF00D4FF)      // Electric cyan glow
+private val SecondaryTeal = Color(0xFF14919B)    // Teal from icon edges
+private val PrimaryNavy = Color(0xFF0A1628)      // Deep navy background
+
+// Status colors
 private val SuccessGreen = Color(0xFF10B981)
 private val WarningAmber = Color(0xFFF59E0B)
 private val ErrorRed = Color(0xFFEF4444)
+
+// Surface colors
 private val CardLight = Color(0xFFFFFFFF)
-private val CardDark = Color(0xFF374151)  // Much lighter card for dark mode
-private val SurfaceLight = Color(0xFFF8FAFC)
-private val SurfaceDark = Color(0xFF1F2937)  // Darker background for contrast
-private val TextPrimaryDark = Color(0xFFFFFFFF)
-private val TextSecondaryDark = Color(0xFFD1D5DB)
+private val CardDark = Color(0xFF0F1D32)         // Navy-tinted card
+private val SurfaceLight = Color(0xFFF0F4F8)     // Cool light grey
+private val SurfaceDark = Color(0xFF050D18)      // Deep navy background
+private val TextPrimaryDark = Color(0xFFE8EEF3)  // Cool white
+private val TextSecondaryDark = Color(0xFFA0B0C0) // Muted silver
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -147,7 +155,7 @@ fun EmisureDashboard(
                     .fillMaxWidth()
                     .background(
                         brush = Brush.horizontalGradient(
-                            colors = listOf(PrimaryBlue, PrimaryPurple)
+                            colors = listOf(PrimaryNavy, SecondaryTeal)
                         )
                     )
                     .padding(24.dp)
@@ -196,7 +204,7 @@ fun EmisureDashboard(
                         .weight(1f),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator(color = PrimaryBlue)
+                    CircularProgressIndicator(color = PrimaryCyan)
                 }
             } else {
                 Column(
@@ -330,7 +338,7 @@ fun DeviceCard(
                 Icon(
                     imageVector = Icons.Default.Phone,
                     contentDescription = null,
-                    tint = PrimaryBlue,
+                    tint = PrimaryCyan,
                     modifier = Modifier.size(24.dp)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -408,7 +416,7 @@ fun DeviceIdCard(
                     Icon(
                         imageVector = Icons.Default.Info,
                         contentDescription = null,
-                        tint = PrimaryPurple,
+                        tint = SecondaryTeal,
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(12.dp))
@@ -433,7 +441,7 @@ fun DeviceIdCard(
                         Icon(
                             imageVector = Icons.Outlined.ContentCopy,
                             contentDescription = "Copy",
-                            tint = PrimaryPurple,
+                            tint = SecondaryTeal,
                             modifier = Modifier.size(18.dp)
                         )
                     }
@@ -454,7 +462,7 @@ fun DeviceIdCard(
                     CircularProgressIndicator(
                         modifier = Modifier.size(16.dp),
                         strokeWidth = 2.dp,
-                        color = PrimaryBlue
+                        color = PrimaryCyan
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(

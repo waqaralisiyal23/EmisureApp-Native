@@ -2,33 +2,55 @@ package com.emisure.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Primary colors
-val PrimaryBlue = Color(0xFF2196F3)
-val PrimaryBlueDark = Color(0xFF1976D2)
-val SecondaryPurple = Color(0xFF7C4DFF)
+// ====================================================================
+// Emisure Brand Colors - Based on App Icon
+// ====================================================================
 
-// Status colors
-val StatusGreen = Color(0xFF4CAF50)
-val StatusRed = Color(0xFFE53935)
-val StatusOrange = Color(0xFFFF9800)
-val StatusBlue = Color(0xFF2196F3)
+// Primary colors - Deep Navy & Electric Cyan
+val PrimaryNavy = Color(0xFF0A1628)      // Deep navy from icon background
+val PrimaryCyan = Color(0xFF00D4FF)      // Electric cyan glow
+val PrimaryCyanDark = Color(0xFF00A8CC)  // Darker cyan for pressed states
 
-// Light theme colors
-val LightBackground = Color(0xFFF5F5F5)
-val LightSurface = Color(0xFFFFFFFF)
-val LightOnSurface = Color(0xFF1C1B1F)
-val LightOnSurfaceVariant = Color(0xFF49454F)
+// Secondary colors - Teal accents
+val SecondaryTeal = Color(0xFF14919B)    // Deeper teal from icon edges
+val SecondaryTealLight = Color(0xFF1AC9D6)
+
+// Metallic accent - From the shield
+val MetallicSilver = Color(0xFFB8C4CE)
+val MetallicSilverDark = Color(0xFF8A9AAB)
+
+// Status colors (keeping semantic meanings)
+val StatusGreen = Color(0xFF10B981)      // Success - Modern emerald
+val StatusRed = Color(0xFFEF4444)        // Error - Vivid red
+val StatusOrange = Color(0xFFF59E0B)     // Warning - Amber
+val StatusBlue = Color(0xFF00D4FF)       // Info - Matches brand cyan
+
+// ====================================================================
+// Light Theme Colors
+// ====================================================================
+val LightBackground = Color(0xFFF0F4F8)       // Cool light grey
+val LightSurface = Color(0xFFFFFFFF)          // Pure white
+val LightSurfaceVariant = Color(0xFFE8EEF3)   // Slightly blue-grey
+val LightOnBackground = Color(0xFF0A1628)     // Navy text
+val LightOnSurface = Color(0xFF0A1628)        // Navy text
+val LightOnSurfaceVariant = Color(0xFF435570) // Muted navy
 val LightCardBackground = Color(0xFFFFFFFF)
 
-// Dark theme colors
-val DarkBackground = Color(0xFF121212)
-val DarkSurface = Color(0xFF1E1E1E)
-val DarkOnSurface = Color(0xFFE6E1E5)
-val DarkOnSurfaceVariant = Color(0xFFCAC4D0)
-val DarkCardBackground = Color(0xFF2D2D2D)
+// ====================================================================
+// Dark Theme Colors
+// ====================================================================
+val DarkBackground = Color(0xFF050D18)        // Deeper than icon bg
+val DarkSurface = Color(0xFF0A1628)           // Icon background navy
+val DarkSurfaceVariant = Color(0xFF11213A)    // Slightly lighter navy
+val DarkOnBackground = Color(0xFFE8EEF3)      // Cool white
+val DarkOnSurface = Color(0xFFE8EEF3)         // Cool white
+val DarkOnSurfaceVariant = Color(0xFFA0B0C0)  // Muted silver
+val DarkCardBackground = Color(0xFF0F1D32)    // Card bg - between surface and bg
 
-// Gradient colors for cards
-val GradientBlueStart = Color(0xFF2196F3)
-val GradientBlueEnd = Color(0xFF21CBF3)
-val GradientPurpleStart = Color(0xFF7C4DFF)
-val GradientPurpleEnd = Color(0xFFB388FF)
+// ====================================================================
+// Gradient Colors - For headers and accents
+// ====================================================================
+val GradientCyanStart = Color(0xFF00D4FF)     // Bright cyan
+val GradientCyanEnd = Color(0xFF14919B)       // Teal
+val GradientNavyStart = Color(0xFF0A1628)     // Deep navy
+val GradientNavyEnd = Color(0xFF1A3A5C)       // Lighter navy
