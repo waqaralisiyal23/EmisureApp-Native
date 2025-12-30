@@ -1,0 +1,10 @@
+# Build outputs
+/build/
+/debug/
+/release/
+
+# Generated source files
+/generated/
+
+# Google services
+google-services.json

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Emisure</string>
+    <string name="device_admin_description">Emisure enables secure EMI payments by ensuring that devices purchased on installment plans remain linked until all payments are completed.</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <!-- Required to lock the device screen -->
+        <force-lock />
+        <!-- Required to prevent factory reset -->
+        <wipe-data />
+        <!-- Required to set password policies -->
+        <limit-password />
+        <!-- Required to watch login attempts -->
+        <watch-login />
+        <!-- Required for password expiration -->
+        <expire-password />
+        <!-- Required to set encryption policies -->
+        <encrypted-storage />
+        <!-- Required to disable camera (future feature) -->
+        <disable-camera />
+        <!-- Required for keyguard features (future feature) -->
+        <disable-keyguard-features />
+    </uses-policies>
+</device-admin>
