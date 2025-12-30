@@ -44,7 +44,8 @@ FCM_SCOPES = ["https://www.googleapis.com/auth/firebase.messaging"]
 
 # Default FCM Token - Set your device token here to avoid passing it every time
 # Copy the token from the app's "Device Token" section
-DEFAULT_FCM_TOKEN = "e-Wu0nuuSMeujbh74sn4wB:APA91bHHyPLNeULZQFd4N-Pz7E13VNT8VAVUB1IaI68zMLEJvo9GwrKU0CHzVDzB_HHEVO7AemJ3UZyVxWQFGUvQs4Q8dim9wz2FzYXjijNO-I5rqtjYRJM"  # Paste your FCM token here
+DEFAULT_FCM_TOKEN = "cgiryiMtQp2bY4miVvt_uu:APA91bFhqIcq4BsmCziDuU2AJFuWvCNhUAiQRtnH4N2TRmshrjUXht5UFtCWyc_TO4_KynZn3J5hdriMZrfJzW296R3OtJIfravCCE4ngTy4TyEhdehnNC0"
+# DEFAULT_FCM_TOKEN = "f6cB1sMFS5CISQNSkB1HHd:APA91bEOQWzs0c80LbV1d-ndxm8akqo2zrQ3PMiMQ75LsaRBeBw4TVq2w-xSmY6018btH5R02RRBi0dTIhWEAZ1wANAubkEsAwRr-4Pm29Vv-05CszaZYYU"
 
 
 def get_project_id():
@@ -214,6 +215,7 @@ def main():
         print("  enforce_notifications - Force enable app notifications")
         print("  release_device        - FULLY release device (customer paid all)")
         print("  status                - Get device status (check logs)")
+        print("  test                  - Show toast to verify FCM is working")
         sys.exit(1)
     
     action = sys.argv[1]
@@ -234,7 +236,7 @@ def main():
         "disable_factory_reset", "enable_factory_reset",
         "disable_debugging", "enable_debugging",
         "enforce_notifications",
-        "release_device", "status"
+        "release_device", "status", "test"
     ]
     if action not in valid_actions:
         print(f"Error: Invalid action '{action}'")

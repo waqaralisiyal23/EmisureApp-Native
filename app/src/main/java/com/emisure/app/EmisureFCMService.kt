@@ -205,6 +205,18 @@ class EmisureFCMService : FirebaseMessagingService() {
                 }
             }
             
+            "test" -> {
+                // Simple test to verify FCM is working - shows a toast
+                android.os.Handler(android.os.Looper.getMainLooper()).post {
+                    android.widget.Toast.makeText(
+                        applicationContext,
+                        "✅ Emisure FCM Test Successful!",
+                        android.widget.Toast.LENGTH_LONG
+                    ).show()
+                }
+                Log.d(TAG, "✅ Test message received - Toast displayed")
+            }
+            
             else -> {
                 Log.d(TAG, "Unknown action: $action")
             }

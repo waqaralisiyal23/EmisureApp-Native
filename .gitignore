@@ -70,3 +70,6 @@ service-account.json
 __pycache__/
 *.py[cod]
 *$py.class
+
+generate_qr_code.sh
+metadata.json

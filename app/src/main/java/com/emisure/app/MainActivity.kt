@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.emisure.app.ui.theme.*
@@ -235,7 +236,12 @@ fun EmisureDashboard(
                     // Device Token Card (FCM Token - for registration)
                     DeviceIdCard(
                         deviceId = fcmToken,
-                        isDarkTheme = isDarkTheme
+                        isDarkTheme = isDarkTheme,
+                        onRefreshToken = {
+                            EmisureFCMService.refreshToken(context) { token ->
+                                fcmToken = token
+                            }
+                        }
                     )
                     
                     Spacer(modifier = Modifier.weight(1f))
@@ -394,7 +400,8 @@ fun DeviceCard(
 @Composable
 fun DeviceIdCard(
     deviceId: String?,
-    isDarkTheme: Boolean
+    isDarkTheme: Boolean,
+    onRefreshToken: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val cardColor = if (isDarkTheme) CardDark else CardLight
@@ -431,22 +438,38 @@ fun DeviceIdCard(
                     )
                 }
                 
-                if (deviceId != null) {
+                Row {
+                    // Refresh button
                     IconButton(
-                        onClick = {
-                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            val clip = ClipData.newPlainText("Device Token", deviceId)
-                            clipboard.setPrimaryClip(clip)
-                            Toast.makeText(context, "Device Token copied", Toast.LENGTH_SHORT).show()
-                        },
+                        onClick = onRefreshToken,
                         modifier = Modifier.size(32.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Outlined.ContentCopy,
-                            contentDescription = "Copy",
+                            imageVector = Icons.Default.Refresh,
+                            contentDescription = "Refresh Token",
                             tint = SecondaryTeal,
                             modifier = Modifier.size(18.dp)
                         )
+                    }
+                    
+                    // Copy button
+                    if (deviceId != null) {
+                        IconButton(
+                            onClick = {
+                                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                val clip = ClipData.newPlainText("Device Token", deviceId)
+                                clipboard.setPrimaryClip(clip)
+                                Toast.makeText(context, "Device Token copied", Toast.LENGTH_SHORT).show()
+                            },
+                            modifier = Modifier.size(32.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.ContentCopy,
+                                contentDescription = "Copy",
+                                tint = SecondaryTeal,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -454,12 +477,16 @@ fun DeviceIdCard(
             Spacer(modifier = Modifier.height(12.dp))
             
             if (deviceId != null) {
-                Text(
-                    text = deviceId.take(40) + "...",
-                    fontSize = 13.sp,
-                    color = if (isDarkTheme) Color.White.copy(alpha = 0.6f) else Color.Black.copy(alpha = 0.5f),
-                    lineHeight = 18.sp
-                )
+                // Show full token in a scrollable/selectable box
+                SelectionContainer {
+                    Text(
+                        text = deviceId,
+                        fontSize = 11.sp,
+                        color = if (isDarkTheme) Color.White.copy(alpha = 0.7f) else Color.Black.copy(alpha = 0.6f),
+                        lineHeight = 16.sp,
+                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace
+                    )
+                }
             } else {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     CircularProgressIndicator(
